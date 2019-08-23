@@ -1,266 +1,115 @@
 import 'package:flutter/material.dart';
 
-const fontColor = Color(0xff7A68B9);
+const primaryGreen = Color(0xff065E52);
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
     @override
     Widget build(BuildContext context) {
         return MaterialApp(
-            home: HomePage()
-        );
-    }
-}
-
-class HomePage extends StatelessWidget {
-    @override
-    Widget build(BuildContext context) {
-        return Scaffold(
-            backgroundColor: Color(0xff6219EC),
-            appBar: myBar(),
-            body: myBody(),
+            home: DefaultTabController(
+                length: 4,
+                child: Scaffold(
+                    floatingActionButton: FloatingActionButton(
+                      onPressed: ()=>{},
+                      backgroundColor: Colors.green,
+                      child: Center(child: Icon(Icons.message),),
+                    ),
+                    appBar: myBar(),
+                    body: homePage(),
+                )
+            )
         );
     }
 
     Widget myBar(){
         return AppBar(
-            elevation: 0.0,
-            backgroundColor: Colors.transparent,
-            leading: Row(
-                children: <Widget>[
-                    SizedBox(width: 30.0,),
-                    Icon(Icons.arrow_back_ios),
-                ],
+            elevation: 8,
+            backgroundColor: primaryGreen,
+            title: Padding(
+                padding: EdgeInsets.only(left: 15),
+                child: Text(
+                    'WhatsApp',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 23,
+                        fontWeight: FontWeight.w400
+                    ),
+                ),
             ),
             actions: <Widget>[
                 Padding(
-                    padding: EdgeInsets.only(right: 17.0),
+                    padding: EdgeInsets.only(right: 20),
                     child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                            color: Colors.green.withOpacity(0.4),
+                        width: 250,
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: <Widget>[
+                                Icon(Icons.search,size: 27,),
+                                SizedBox(width: 20,),
+                                Icon(Icons.message, size: 27,),
+                                SizedBox(width: 20,),
+                                Icon(Icons.more_vert, size: 27,)
+                            ],
                         ),
-                        child: MaterialButton(
-                            child: Row(
+                    )
+                )
+            ],
+            bottom: TabBar(
+                    indicatorColor: Colors.white,
+                    tabs: <Widget>[
+                        Container(
+                            child: Icon(Icons.camera_alt),
+                        ),
+                        Tab(text: 'CHATS',),
+                        Tab(text: 'STATUS',),
+                        Tab(text: 'CALLS',)
+                    ],
+
+                ),
+        );
+    }
+
+    Widget homePage() {
+        return ListView.builder(
+            itemCount: 30,
+            itemBuilder: (context, index){
+                return Column(
+                    children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.only(left: 70),
+                          child: Divider(height: 10,),
+                        ),
+                        ListTile(
+                            leading: CircleAvatar(
+                                backgroundColor: Colors.white,
+                                child: Image.network('https://cdn.ciudad.com.ar/sites/default/files/styles/grizzly_galeria/public/nota/2018/03/07/what-homer-simpson-taught-us-about-doughnuts_3k8v.jpg?itok=YbaozsGF'),
+                            ),
+                            title: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
-                                    Icon(Icons.check, color: Colors.green,),
-                                    SizedBox(width: 10.0,),
                                     Text(
-                                        'enzo friends',
+                                        'Homero simpson',
                                         style: TextStyle(
-                                            color: Colors.green,
-                                            fontSize: 18.0
+                                          fontSize: 18,
+                                            fontWeight: FontWeight.w500
+                                        ),
+                                    ),
+                                    Text(
+                                        '15:30',
+                                        style: TextStyle(
+                                            color: Colors.grey,
+                                            fontSize: 14
                                         ),
                                     )
                                 ],
                             ),
-                        )
-                )
-                ),
-            ],
-        );
-    }
-
-    Widget myBody(){
-        return Column(
-            children: <Widget>[
-                userWidget(),
-                rectangleWidget(),
-                graphicWidget(),
-                friendsWidget()
-            ],
-        );
-    }
-
-    Widget userWidget() => Padding(
-        padding: EdgeInsets.only(left: 35.0, top: 25.0),
-        child: Row(
-            children: <Widget>[
-                Container(
-                    width: 90.0,
-                    height: 90.0,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20.0),
-                        image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: AssetImage('assets/matt.jpg'),
+                            subtitle: Text('ESTE ES mi mensaje responde culiadaso'),
                         ),
-                    ),
-                ),
-                SizedBox(width: 30.0,),
-                Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                        Text(
-                            'Helders',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 25.0,
-                                fontWeight: FontWeight.bold
-                            ),
-                        ),
-                        Text(
-                            'Matt',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 25.0,
-                                fontWeight: FontWeight.w300
-                            ),
-                        )
                     ],
-                )
-            ],
-        )
-    );
-
-    Widget rectangleWidget(){
-        return Padding(
-            padding: EdgeInsets.fromLTRB(35, 10, 17, 0),
-            child: Container(
-                width: double.infinity,
-                height: 150.0,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.0),
-                    color: Colors.white
-                ),
-                child: CustomPaint(
-                    painter: PointsPainter(),
-                    child: Row(
-                        children: <Widget>[
-                            Expanded(
-                                child: Padding (
-                                    padding: EdgeInsets.only(left: 30.0),
-                                    child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: <Widget>[
-                                            Text('957', style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-                                            Text('place', style: TextStyle(fontSize: 17, color: fontColor),)
-                                        ],
-                                    ),
-                                )
-                            ),
-                            Expanded(
-                                child: Padding(
-                                    padding: EdgeInsets.only(left: 30.0),
-                                    child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: <Widget>[
-                                            Text('8 500', style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-                                            Text('points', style: TextStyle(fontSize: 17, color: fontColor))
-                                        ],
-                                    ),
-                                )
-                                
-                            )
-                        ],
-                    ),
-                )
-                
-            )
+                );
+            }
         );
-        
-    }
-    
-    Widget graphicWidget() => Expanded(
-        child: Container(),
-    );
-
-    Widget friendsWidget(){
-        return Container(
-            margin: EdgeInsets.only(top: 20),
-            height: 200,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-                color: Colors.white
-            ),
-            child: Padding(
-                padding: EdgeInsets.only(left: 35, right: 17),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                        Text('Friends', style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20
-                            ),
-                        ),
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                                Container(
-                                    height: 70,
-                                    width: 70,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10.0),
-                                        image: DecorationImage(
-                                            image: AssetImage('assets/matt.jpg'),
-                                            fit: BoxFit.cover
-                                        ),
-                                    ),
-                                ),
-                                Container(
-                                    height: 70,
-                                    width: 70,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10.0),
-                                        image: DecorationImage(
-                                            image: AssetImage('assets/matt.jpg'),
-                                            fit: BoxFit.cover
-                                        ),
-                                    ),
-                                ),
-                                Container(
-                                    height: 70,
-                                    width: 70,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10.0),
-                                        image: DecorationImage(
-                                            image: AssetImage('assets/matt.jpg'),
-                                            fit: BoxFit.cover
-                                        ),
-                                    ),
-                                ),
-                                Container(
-                                    height: 70,
-                                    width: 70,
-                                    decoration: BoxDecoration(
-                                        color: Colors.yellowAccent,
-                                        borderRadius: BorderRadius.circular(10.0)
-                                    ),
-                                    child: Center (child: Text('14',  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),)
-                                ),
-                            ],
-                        )
-                    ],
-                ),
-            )
-            
-        );
-    }
-
-
-}
-
-class PointsPainter extends CustomPainter {
-    Paint _paint = Paint();
-
-    @override
-    void paint(Canvas canvas, Size size){
-        _paint.color = Colors.deepPurpleAccent.withOpacity(0.5);
-        var path = Path();
-        path.moveTo(0, 0);
-        path.lineTo(size.width / 2, 0);
-        path.lineTo((size.width / 2) - 100, size.height);
-        path.lineTo(0, size.height);
-        path.close();
-
-        canvas.drawPath(path, _paint);
-    }
-
-    @override
-    bool shouldRepaint(CustomPainter oldDelegate){
-        return true;
     }
 }
