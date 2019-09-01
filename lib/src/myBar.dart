@@ -6,7 +6,7 @@ class MyBar extends StatelessWidget with PreferredSizeWidget {
     Widget build(BuildContext context) {
         return AppBar(
             elevation: 8,
-            backgroundColor: Colors.greenAccent,
+            backgroundColor: Colors.blueGrey,
             title: Padding(
                 padding: EdgeInsets.only(left: 15),
                 child: Text(
@@ -36,18 +36,18 @@ class MyBar extends StatelessWidget with PreferredSizeWidget {
                     )
                 )
             ],
-            bottom: TabBar(
-                    indicatorColor: Colors.white,
-                    tabs: <Widget>[
-                        Container(
-                            child: Icon(Icons.camera_alt),
-                        ),
-                        Tab(text: 'CHATS',),
-                        Tab(text: 'STATUS',),
-                        Tab(text: 'CALLS',)
-                    ],
+            // bottom: TabBar(
+            //         indicatorColor: Colors.white,
+            //         tabs: <Widget>[
+            //             Container(
+            //                 child: Icon(Icons.camera_alt),
+            //             ),
+            //             Tab(text: 'CHATS',),
+            //             Tab(text: 'STATUS',),
+            //             Tab(text: 'CALLS',)
+            //         ],
 
-                ),
+            //     ),
         );
     }
 
