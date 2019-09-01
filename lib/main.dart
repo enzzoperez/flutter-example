@@ -1,8 +1,13 @@
+import 'package:exampleflut/src/myBar.dart';
+import 'package:exampleflut/src/subpage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 const primaryGreen = Color(0xff065E52);
 
-void main() => runApp(MyApp());
+void main(){
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
     @override
@@ -12,76 +17,46 @@ class MyApp extends StatelessWidget {
                 length: 4,
                 child: Scaffold(
                     floatingActionButton: FloatingActionButton(
-                      onPressed: ()=>{},
+                      onPressed: (){
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context)=> SecondPage()
+                              )
+                          );
+                      },
                       backgroundColor: Colors.green,
                       child: Center(child: Icon(Icons.message),),
                     ),
-                    appBar: myBar(),
-                    body: homePage(),
+                    appBar: MyBar(),
+                    body: TabBarView(
+                        children: <Widget>[
+                            Center(child: Text('CAMERA'),),
+                            listChats(),
+                            Center(child: Text('STATUS'),),
+                            Center(child: Text('CALLS'),)
+                        ],
+                    ),
                 )
             )
         );
     }
 
-    Widget myBar(){
-        return AppBar(
-            elevation: 8,
-            backgroundColor: primaryGreen,
-            title: Padding(
-                padding: EdgeInsets.only(left: 15),
-                child: Text(
-                    'WhatsApp',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 23,
-                        fontWeight: FontWeight.w400
-                    ),
-                ),
-            ),
-            actions: <Widget>[
-                Padding(
-                    padding: EdgeInsets.only(right: 20),
-                    child: Container(
-                        width: 250,
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: <Widget>[
-                                Icon(Icons.search,size: 27,),
-                                SizedBox(width: 20,),
-                                Icon(Icons.message, size: 27,),
-                                SizedBox(width: 20,),
-                                Icon(Icons.more_vert, size: 27,)
-                            ],
-                        ),
-                    )
-                )
-            ],
-            bottom: TabBar(
-                    indicatorColor: Colors.white,
-                    tabs: <Widget>[
-                        Container(
-                            child: Icon(Icons.camera_alt),
-                        ),
-                        Tab(text: 'CHATS',),
-                        Tab(text: 'STATUS',),
-                        Tab(text: 'CALLS',)
-                    ],
-
-                ),
-        );
-    }
-
-    Widget homePage() {
+    Widget listChats() {
         return ListView.builder(
             itemCount: 30,
             itemBuilder: (context, index){
                 return Column(
                     children: <Widget>[
-                        Padding(
-                          padding: EdgeInsets.only(left: 70),
-                          child: Divider(height: 10,),
-                        ),
                         ListTile(
+                            onTap: (){
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder:
+                                    (context)=>SecondPage()
+                                    )
+                                );
+                            },
                             leading: CircleAvatar(
                                 backgroundColor: Colors.white,
                                 child: Image.network('https://cdn.ciudad.com.ar/sites/default/files/styles/grizzly_galeria/public/nota/2018/03/07/what-homer-simpson-taught-us-about-doughnuts_3k8v.jpg?itok=YbaozsGF'),
@@ -106,6 +81,10 @@ class MyApp extends StatelessWidget {
                                 ],
                             ),
                             subtitle: Text('ESTE ES mi mensaje responde culiadaso'),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(left: 70),
+                          child: Divider(height: 10,),
                         ),
                     ],
                 );
