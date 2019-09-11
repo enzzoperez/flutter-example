@@ -1,6 +1,3 @@
-
-import 'package:exampleflut/src/myBar.dart';
-import 'package:exampleflut/src/subpage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -15,19 +12,43 @@ class MyApp extends StatelessWidget {
     Widget build(BuildContext context) {
         return MaterialApp(
             home: Scaffold(
-                appBar: MyBar(),
-                body: ListaUno(),
+                body: Container(
+                    color: Colors.teal,
+                    child: SafeArea(
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                                Container(
+                                    width: 100,
+                                    color: Colors.red,
+                                ),
+                                Container(
+                                    width: 100,
+                                    child: Center(
+                                        child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: <Widget>[
+                                                Container(
+                                                    height: 100,
+                                                    color: Colors.yellow,
+                                                ),
+                                                Container(
+                                                    height: 100,
+                                                    color: Colors.green,
+                                                )
+                                            ],
+                                        ),
+                                    ),
+                                ),
+                                Container(
+                                    width: 100,
+                                    color: Colors.blueAccent,
+                                ),
+                            ],
+                        ),
+                    ),
+                )
             ),
-        );
-    }
-}
-
-class ListaUno extends StatelessWidget {
-    @override
-    Widget build(BuildContext context) {
-        return GridView.count(
-            crossAxisCount: 5,
-            children: List.generate(30, (index)=>Center(child: Text('GRIDD $index'),))
         );
     }
 }
