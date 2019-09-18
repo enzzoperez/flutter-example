@@ -27,25 +27,25 @@ class _BallAppState extends State<BallApp> {
                     backgroundColor: Colors.teal[800],
                 ),
                 body: Column(
-                  children: <Widget>[
-                    Expanded(
-                        child: Container(
-                          decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                              stops: [0.3, 1],
-                              colors: [Colors.green, Colors.blue])
-                          ),
-                          child: FlatButton(
-                              child: Image.asset('assets/img/ball$countImg.png'),
-                              onPressed: (){
-                                  randomImage();
-                              },
-                          ),
-                      ),
-                    ),
-                  ],
+                    children: <Widget>[
+                        Expanded(
+                            child: Container(
+                                decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight,
+                                    stops: [0.3, 1],
+                                    colors: [Colors.green, Colors.blue])
+                                ),
+                                child: FlatButton(
+                                    child: Image.asset('assets/img/ball$countImg.png'),
+                                    onPressed: (){
+                                        randomImage();
+                                    },
+                                ),
+                            ),
+                        ),
+                    ],
                 ),
             ),
         );
